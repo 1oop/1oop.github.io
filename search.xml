@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Unicorn系列-入门</title>
+    <url>/2020/08/23/Unicorn%E7%B3%BB%E5%88%97-%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<!-- # Unicorn系列-入门 -->
+<ul>
+<li>官方网站地址：<a href="https://www.unicorn-engine.org/">https://www.unicorn-engine.org/</a></li>
+<li>官方文档地址：<a href="https://www.unicorn-engine.org/docs/">https://www.unicorn-engine.org/docs/</a></li>
+<li>源码下载地址：<a href="https://www.unicorn-engine.org/download/">https://www.unicorn-engine.org/download/</a></li>
+<li>github仓库地址：<a href="https://github.com/unicorn-engine/unicorn">https://github.com/unicorn-engine/unicorn</a><h2 id="官方原文介绍"><a href="#官方原文介绍" class="headerlink" title="官方原文介绍"></a>官方原文介绍</h2><blockquote>
+<p>Unicorn is a lightweight multi-platform, multi-architecture CPU emulator framework.<br><strong>Highlight features:</strong><br>Multi-architectures: Arm, Arm64 (Armv8), M68K, Mips, Sparc, &amp; X86 (include X86_64).</p>
+<ul>
+<li>Clean/simple/lightweight/intuitive architecture-neutral API.</li>
+<li>Implemented in pure C language, with bindings for  Pharo, Crystal, Clojure, Visual Basic, Perl, Rust, Haskell, Ruby, Python, Java, Go, .NET, Delphi/Pascal &amp; MSVC available.</li>
+<li>Native support for Windows &amp; <em>nix (with Mac OSX, Linux, </em>BSD &amp; Solaris confirmed).</li>
+<li>High performance by using Just-In-Time compiler technique.</li>
+<li>Support fine-grained instrumentation at various levels.<br>Thread-safe by design.<br>Distributed under free software license GPLv2.</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>由官方介绍可以知道</p>
+<blockquote>
+<p>Unicorn 是一款基于qemu模拟器的，轻量的跨平台模拟执行框架，该框架可以跨平台执行Arm, Arm64 (Armv8), M68K, Mips, Sparc, &amp; X86 (include X86_64)等指令集的原生程序。</p>
+</blockquote>
+<p><strong>unicorn拥有以下优点：</strong></p>
+<ol>
+<li>多语言接口支持</li>
+<li>线程安全，支持多线程并发</li>
+<li>多架构支持</li>
+<li>虚拟内存</li>
+<li>多平台支持</li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>以python使用安装为例</p>
+<h3 id="编译-amp-安装-unicorn"><a href="#编译-amp-安装-unicorn" class="headerlink" title="编译 &amp; 安装 unicorn"></a>编译 &amp; 安装 unicorn</h3><h4 id="1-下载源码"><a href="#1-下载源码" class="headerlink" title="1.下载源码"></a>1.下载源码</h4><p>源码项目目录结构<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">. &lt;- 主要引擎core engine + README + 编译文档COMPILE.TXT 等</span><br><span class="line">├── arch &lt;- 各语言反编译支持的代码实现</span><br><span class="line">├── bindings &lt;- 中间件</span><br><span class="line">│ ├── dotnet &lt;- .Net 中间件 + 测试代码</span><br><span class="line">│ ├── go &lt;- go 中间件 + 测试代码</span><br><span class="line">│ ├── haskell &lt;- Haskell 中间件 + 测试代码</span><br><span class="line">│ ├── java &lt;- Java 中间件 + 测试代码</span><br><span class="line">│ ├── pascal &lt;- Pascal 中间件 + 测试代码</span><br><span class="line">│ ├── python &lt;- Python 中间件 + 测试代码</span><br><span class="line">│ ├── ruby &lt;- Ruby 中间件 + 测试代码</span><br><span class="line">│ └── vb6 &lt;- VB6 中间件 + 测试代码</span><br><span class="line">├── docs &lt;- 文档，主要是Unicorn的实现思路</span><br><span class="line">├── include &lt;- C头文件</span><br><span class="line">├── msvc &lt;- Microsoft Visual Studio 支持（Windows）</span><br><span class="line">├── qemu &lt;- qemu框架源码</span><br><span class="line">├── samples &lt;- Unicorn使用示例</span><br><span class="line">└── tests &lt;- C语言测试用例</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-编译"><a href="#2-编译" class="headerlink" title="2.编译"></a>2.编译</h4><p>也可跳过本步骤，直接下周官网预编译的二进制文件。</p>
+<h5 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h5><p>在windows下面编译，有两种方式</p>
+<ol>
+<li>Visual Studio</li>
+<li>msys2<br>第一种较为简单，纯图形界面操作,但是安装文件较大.第二种操作稍复杂一点,但安装较轻量.<br>下面主要介绍第种方式编译过程。</li>
+</ol>
+<ul>
+<li>msys2编译unicorn<br><strong>msys2官方介绍</strong><blockquote>
+<p>MSYS2 is a collection of tools and libraries providing you with an easy-to-use environment for building, installing and running native Windows software.<br>It consists of a command line terminal called mintty, bash, version control systems like git and subversion, tools like tar and awk and even build systems like autotools, all based on a modified version of Cygwin. Despite some of these central parts being based on Cygwin, the main focus of MSYS2 is to provide a build environment for native Windows software and the Cygwin-using parts are kept at a minimum. MSYS2 provides up-to-date native builds for GCC, mingw-w64, CPython, CMake, Meson, OpenSSL, FFmpeg, Rust, Ruby, just to name a few.</p>
+</blockquote>
+</li>
+</ul>
+<p>从官方介绍可以知道,msys2是基于Cygwin的修改版,并且提供了一个方便的包管理软件Pacman.<br><em>官方下载链接:</em> <a href="https://repo.msys2.org/distrib/x86_64/msys2-x86_64-20200720.exe">msys2-x86_64-20200720.exe</a></p>
+<p>下载安装完成后,启动命令终端.<br>首先执行下面命令升级系统包<br><a href="update_msys2.png">升级软件版本</a><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ pacman --needed -Sy bash pacman pacman-mirrors msys2-runtime</span><br></pre></td></tr></table></figure><br>然后关闭MSYS2,重新启动终端.执行下面命令再次更新.<br><a href="update_msys2_1.png">再次更新</a><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ pacman -Su</span><br></pre></td></tr></table></figure><br>安装C项目编译工具链.<br><a href="install_c_build_chains.png">安装c语言编译工具</a><br>windows 64-bit 执行下面命令<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ pacman -S make</span><br><span class="line">$ pacman -S mingw-w64-x86_64-toolchain</span><br></pre></td></tr></table></figure><br>最后开始根据所需版本,编译指定文件<br>以windows 64位操作系统为例<br>到源码目录下执行编译下面命令</p>
+<blockquote>
+<p>注意:本次命令需要打开MinGW终端执行,而不是msys2下,否则会报错.<br><a href="build_unicorn_win64.png">开始编译</a><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./make.sh cross-win64</span><br></pre></td></tr></table></figure><br>成功编译完成后,在当前目录下可以找到编译成功的动态库 unicorn.dll<br><a href="done.png">编译成功截图</a><br>在simples目录下,有一些可执行样例文件,但是需要拷贝相应依赖到目录下,才可执行.<br>所需文件有:</p>
+<ol>
+<li>unicorn.dll (!)</li>
+<li>%MSYS2%\mingw64\bin\libgcc_s_seh-1.dll</li>
+<li>%MSYS2%\mingw64\bin\libwinpthread-1.dll</li>
+</ol>
+</blockquote>
+<h5 id="nix"><a href="#nix" class="headerlink" title="*nix"></a>*nix</h5><p>在*nix系统中,编译较为简单,大概操作如下<br>安装完c编译工具后….<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /yourpath/unicorn &amp;&amp; make install</span><br></pre></td></tr></table></figure><br>狗头.jpg</p>
+<h4 id="3-安装python-binding"><a href="#3-安装python-binding" class="headerlink" title="3.安装python binding"></a>3.安装python binding</h4><p>将编译出来的动态库(包括其他依赖库)复制到 /yourpath/unicorn/bindings/python/prebuilt<br><a href="copy_to_python.png">复制到指定目录</a><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /yourpath/unicorn/bindings/python</span><br><span class="line">$ python setup.py bdist_wheel <span class="comment">#构建whl文件</span></span><br><span class="line">$ pip install dist/unicorn-1.0.2rc4-py2.py3-none-win_amd64.whl</span><br></pre></td></tr></table></figure></p>
+<h3 id="下载提前编译的二进制文件"><a href="#下载提前编译的二进制文件" class="headerlink" title="下载提前编译的二进制文件"></a>下载提前编译的二进制文件</h3><p><strong>除上述编译安装方法外，还可以根据平台直接选择下载提前编译好的二进制文件，在此不再赘述，可查看官方安装教程</strong></p>
+<blockquote>
+<p>官方提供的已编译的版本较旧,建议使用最新版本源码自行编译</p>
+</blockquote>
+<h2 id="使用教程"><a href="#使用教程" class="headerlink" title="使用教程"></a>使用教程</h2><h3 id="python代码示例"><a href="#python代码示例" class="headerlink" title="python代码示例"></a>python代码示例</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 导入unicorn库</span></span><br><span class="line"><span class="keyword">import</span> unicorn</span><br><span class="line"><span class="comment"># 导入arm_const指令集常量</span></span><br><span class="line"><span class="keyword">from</span> unicorn <span class="keyword">import</span> arm_const</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 硬编码执行代码</span></span><br><span class="line">ARM_CODE = <span class="string">b&quot;\x37\x00\xa0\xe3\x03\x10\x42\xe0&quot;</span></span><br><span class="line"><span class="comment"># mov r0, #0x37;</span></span><br><span class="line"><span class="comment"># sub r1, r2, r3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># callback for tracing instructions</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hook_code</span>(<span class="params">uc, address, size, user_data</span>):</span></span><br><span class="line">    print(<span class="string">&quot;&gt;&gt;&gt; Tracing instruction at 0x%x, instruction size = 0x%x&quot;</span> %</span><br><span class="line">          (address, size))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_arm</span>():</span></span><br><span class="line">    print(<span class="string">&quot;执行 ARM 代码&quot;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 初始化设备为arm模式</span></span><br><span class="line">        mu = unicorn.Uc(unicorn.UC_ARCH_ARM, unicorn.UC_MODE_THUMB)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 给初始化的设备，映射2MB内存</span></span><br><span class="line">        ADDRESS = <span class="number">0x10000</span></span><br><span class="line">        mu.mem_map(ADDRESS, <span class="number">2</span> * <span class="number">0x10000</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 写入代码数据到虚拟设备内存</span></span><br><span class="line">        mu.mem_write(ADDRESS, ARM_CODE)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 写入数据到寄存器</span></span><br><span class="line">        mu.reg_write(arm_const.UC_ARM_REG_R0, <span class="number">0x1234</span>)</span><br><span class="line">        mu.reg_write(arm_const.UC_ARM_REG_R2, <span class="number">0x6789</span>)</span><br><span class="line">        mu.reg_write(arm_const.UC_ARM_REG_R3, <span class="number">0x3333</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 添加指令级的Hook</span></span><br><span class="line">        mu.hook_add(unicorn.UC_HOOK_CODE, hook_code,</span><br><span class="line">                    begin=ADDRESS, end=ADDRESS)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 启动设备</span></span><br><span class="line">        mu.emu_start(ADDRESS, ADDRESS + len(ARM_CODE))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 读取寄存器的值</span></span><br><span class="line">        r0 = mu.reg_read(arm_const.UC_ARM_REG_R0)</span><br><span class="line">        r1 = mu.reg_read(arm_const.UC_ARM_REG_R1)</span><br><span class="line">        print(<span class="string">&quot;&gt;&gt;&gt; R0 = 0x%x&quot;</span> % r0)</span><br><span class="line">        print(<span class="string">&quot;&gt;&gt;&gt; R1 = 0x%x&quot;</span> % r1)</span><br><span class="line">    <span class="keyword">except</span> unicorn.UcError <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">&quot;ERROR: %s&quot;</span> % e)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    test_arm()</span><br></pre></td></tr></table></figure>
+<h3 id="相关说明"><a href="#相关说明" class="headerlink" title="相关说明"></a>相关说明</h3><ol>
+<li>Unicorn 支持多种不同的CPU指令集，每一种指令集都有自己独立的寄存器, Unicorn使用统一API管理多种不同的CPU指令集，并将寄存器名字映射成数字常量</li>
+<li>寄存器常量命名规则<br>UC_ + 指令集 + REG + 大写寄存器名<br>UC_ARM_REG_ + 大写寄存器名 （UC_ARM_REG_R0）<br>UC_X86_REG_ + 大写寄存器名 （UC_X86_REG_EAX）</li>
+<li>Uc 是unicorn的主类，Uc对象则代表了一个独立的虚拟机实例，它有独立的寄存器和内存等资源，不同Uc对象之间的数据是独立的。Uc的构造函数有两个参数 arch 和 mode，用来指定模拟执行的指令集和对应的位数或模式。<br>arch常量参数一般以 UC_ARCH_ 开头，MODE常量以UC_MODE_ 开头。<br>同一种指令集可以有多种模式，比如x86可以同时运行32位和16位的汇编，arm也有arm模式和Thumb模式，它们是向下兼容的，并可以通过特殊指令来切换CPU运行模式。 调用构造函数时的模式（mode）以第一条执行指令的模式为准。</li>
+<li>想用Unicorn模拟执行代码，是不能将代码字节流直接以参数形式传递给Unicorn，而是将要执行的代码写入到Unicorn 的虚拟内存中。Uc 虚拟机实例初始内存是没有任何映射的，在读写内存之前使用uc_mem_map函数映射一段内存。</li>
+<li>em_map函数要求 address 和 size 参数都与0x1000对齐,否则会报UC_ERR_ARG异常。</li>
+<li>要执行代码，就需要将欲执行代码的字节数据写入到虚拟机内存中。</li>
+<li>mem_write的第二个参数只支持python的byte数组，不能是String或者bytearray。</li>
+<li>emu_start 可以通过timeout参数设置最长执行时长，防止线程死在虚拟机里面。</li>
+<li>执行完成后，可以通过读取内存或寄存器的方式来获取执行结果。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Unicorn搭配keystone，可以完成很多跨平台二进制文件的黑盒执行与调用。在逆向分析和爬虫领域有极高实用的价值。</p>
+<p>文章参考：<br><a href="https://bbs.pediy.com/thread-253868.htm">https://bbs.pediy.com/thread-253868.htm</a><br><a href="https://github.com/kabeor/Micro-Unicorn-Engine-API-Documentation/blob/master/Micro%20Unicorn-Engine%20API%20Documentation.md">https://github.com/kabeor/Micro-Unicorn-Engine-API-Documentation/blob/master/Micro%20Unicorn-Engine%20API%20Documentation.md</a><br><a href="https://www.unicorn-engine.org/docs/">https://www.unicorn-engine.org/docs/</a></p>
+]]></content>
+      <categories>
+        <category>unicorn</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>unicorn</tag>
+        <tag>逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker与linux容器技术</title>
+    <url>/2020/10/15/Docker%E4%B8%8Elinux%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>linux</tag>
+        <tag>容器</tag>
+      </tags>
+  </entry>
+</search>

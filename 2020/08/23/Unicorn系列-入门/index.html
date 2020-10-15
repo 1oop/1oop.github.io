@@ -1,0 +1,323 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unicorn系列-入门 | 1oop‘s Blog</title><meta name="description" content="官方网站地址：https:&#x2F;&#x2F;www.unicorn-engine.org&#x2F; 官方文档地址：https:&#x2F;&#x2F;www.unicorn-engine.org&#x2F;docs&#x2F; 源码下载地址：https:&#x2F;&#x2F;www.unicorn-engine.org&#x2F;download&#x2F; github仓库地址：https:&#x2F;&#x2F;github.com&#x2F;unicorn-engine&#x2F;unicorn官方原文介绍 Unicorn"><meta name="keywords" content="python,unicorn,逆向"><meta name="author" content="1oop"><meta name="copyright" content="1oop"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://youma.today/2020/08/23/Unicorn%E7%B3%BB%E5%88%97-%E5%85%A5%E9%97%A8/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="Unicorn系列-入门"><meta property="og:url" content="https://youma.today/2020/08/23/Unicorn%E7%B3%BB%E5%88%97-%E5%85%A5%E9%97%A8/"><meta property="og:site_name" content="1oop‘s Blog"><meta property="og:description" content="官方网站地址：https:&#x2F;&#x2F;www.unicorn-engine.org&#x2F; 官方文档地址：https:&#x2F;&#x2F;www.unicorn-engine.org&#x2F;docs&#x2F; 源码下载地址：https:&#x2F;&#x2F;www.unicorn-engine.org&#x2F;download&#x2F; github仓库地址：https:&#x2F;&#x2F;github.com&#x2F;unicorn-engine&#x2F;unicorn官方原文介绍 Unicorn"><meta property="og:image" content="https://youma.today/2020/08/23/Unicorn%E7%B3%BB%E5%88%97-%E5%85%A5%E9%97%A8/unicorn.png"><meta property="article:published_time" content="2020-08-23T14:32:43.000Z"><meta property="article:modified_time" content="2020-10-15T03:59:03.963Z"><meta name="twitter:card" content="summary"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.2.0',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime: '',
+  last_push_date: '天前',
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+      const now = new Date()
+      const expiryDay = ttl * 86400000
+      const item = {
+        value: value,
+        expiry: now.getTime() + expiryDay,
+      }
+      localStorage.setItem(key, JSON.stringify(item))
+    },
+  
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-10-15 11:59:03'
+}</script><noscript><style type="text/css">
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var autoChangeMode = 'false'
+var t = saveToLocal.get('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (saveToLocal.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">2</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">6</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="color"></div><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%98%E6%96%B9%E5%8E%9F%E6%96%87%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">官方原文介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91-amp-%E5%AE%89%E8%A3%85-unicorn"><span class="toc-number">2.1.</span> <span class="toc-text">编译 &amp; 安装 unicorn</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%B8%8B%E8%BD%BD%E6%BA%90%E7%A0%81"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.下载源码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%BC%96%E8%AF%91"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.编译</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#windows"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">windows</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#nix"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">*nix</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85python-binding"><span class="toc-number">2.1.3.</span> <span class="toc-text">3.安装python binding</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%8F%90%E5%89%8D%E7%BC%96%E8%AF%91%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">下载提前编译的二进制文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">使用教程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#python%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.1.</span> <span class="toc-text">python代码示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E8%AF%B4%E6%98%8E"><span class="toc-number">3.2.</span> <span class="toc-text">相关说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(/2020/08/23/Unicorn%E7%B3%BB%E5%88%97-%E5%85%A5%E9%97%A8/unicorn.png)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">1oop‘s Blog</a></span><span class="menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">Unicorn系列-入门</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-08-23T14:32:43.000Z" title="发表于 2020-08-23 22:32:43">2020-08-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-10-15T03:59:03.963Z" title="更新于 2020-10-15 11:59:03">2020-10-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/unicorn/">unicorn</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><!-- # Unicorn系列-入门 -->
+<ul>
+<li>官方网站地址：<a target="_blank" rel="noopener" href="https://www.unicorn-engine.org/">https://www.unicorn-engine.org/</a></li>
+<li>官方文档地址：<a target="_blank" rel="noopener" href="https://www.unicorn-engine.org/docs/">https://www.unicorn-engine.org/docs/</a></li>
+<li>源码下载地址：<a target="_blank" rel="noopener" href="https://www.unicorn-engine.org/download/">https://www.unicorn-engine.org/download/</a></li>
+<li>github仓库地址：<a target="_blank" rel="noopener" href="https://github.com/unicorn-engine/unicorn">https://github.com/unicorn-engine/unicorn</a><h2 id="官方原文介绍"><a href="#官方原文介绍" class="headerlink" title="官方原文介绍"></a>官方原文介绍</h2><blockquote>
+<p>Unicorn is a lightweight multi-platform, multi-architecture CPU emulator framework.<br><strong>Highlight features:</strong><br>Multi-architectures: Arm, Arm64 (Armv8), M68K, Mips, Sparc, &amp; X86 (include X86_64).</p>
+<ul>
+<li>Clean/simple/lightweight/intuitive architecture-neutral API.</li>
+<li>Implemented in pure C language, with bindings for  Pharo, Crystal, Clojure, Visual Basic, Perl, Rust, Haskell, Ruby, Python, Java, Go, .NET, Delphi/Pascal &amp; MSVC available.</li>
+<li>Native support for Windows &amp; <em>nix (with Mac OSX, Linux, </em>BSD &amp; Solaris confirmed).</li>
+<li>High performance by using Just-In-Time compiler technique.</li>
+<li>Support fine-grained instrumentation at various levels.<br>Thread-safe by design.<br>Distributed under free software license GPLv2.</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>由官方介绍可以知道</p>
+<blockquote>
+<p>Unicorn 是一款基于qemu模拟器的，轻量的跨平台模拟执行框架，该框架可以跨平台执行Arm, Arm64 (Armv8), M68K, Mips, Sparc, &amp; X86 (include X86_64)等指令集的原生程序。</p>
+</blockquote>
+<p><strong>unicorn拥有以下优点：</strong></p>
+<ol>
+<li>多语言接口支持</li>
+<li>线程安全，支持多线程并发</li>
+<li>多架构支持</li>
+<li>虚拟内存</li>
+<li>多平台支持</li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>以python使用安装为例</p>
+<h3 id="编译-amp-安装-unicorn"><a href="#编译-amp-安装-unicorn" class="headerlink" title="编译 &amp; 安装 unicorn"></a>编译 &amp; 安装 unicorn</h3><h4 id="1-下载源码"><a href="#1-下载源码" class="headerlink" title="1.下载源码"></a>1.下载源码</h4><p>源码项目目录结构<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">. &lt;- 主要引擎core engine + README + 编译文档COMPILE.TXT 等</span><br><span class="line">├── arch &lt;- 各语言反编译支持的代码实现</span><br><span class="line">├── bindings &lt;- 中间件</span><br><span class="line">│ ├── dotnet &lt;- .Net 中间件 + 测试代码</span><br><span class="line">│ ├── go &lt;- go 中间件 + 测试代码</span><br><span class="line">│ ├── haskell &lt;- Haskell 中间件 + 测试代码</span><br><span class="line">│ ├── java &lt;- Java 中间件 + 测试代码</span><br><span class="line">│ ├── pascal &lt;- Pascal 中间件 + 测试代码</span><br><span class="line">│ ├── python &lt;- Python 中间件 + 测试代码</span><br><span class="line">│ ├── ruby &lt;- Ruby 中间件 + 测试代码</span><br><span class="line">│ └── vb6 &lt;- VB6 中间件 + 测试代码</span><br><span class="line">├── docs &lt;- 文档，主要是Unicorn的实现思路</span><br><span class="line">├── include &lt;- C头文件</span><br><span class="line">├── msvc &lt;- Microsoft Visual Studio 支持（Windows）</span><br><span class="line">├── qemu &lt;- qemu框架源码</span><br><span class="line">├── samples &lt;- Unicorn使用示例</span><br><span class="line">└── tests &lt;- C语言测试用例</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-编译"><a href="#2-编译" class="headerlink" title="2.编译"></a>2.编译</h4><p>也可跳过本步骤，直接下周官网预编译的二进制文件。</p>
+<h5 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h5><p>在windows下面编译，有两种方式</p>
+<ol>
+<li>Visual Studio</li>
+<li>msys2<br>第一种较为简单，纯图形界面操作,但是安装文件较大.第二种操作稍复杂一点,但安装较轻量.<br>下面主要介绍第种方式编译过程。</li>
+</ol>
+<ul>
+<li>msys2编译unicorn<br><strong>msys2官方介绍</strong><blockquote>
+<p>MSYS2 is a collection of tools and libraries providing you with an easy-to-use environment for building, installing and running native Windows software.<br>It consists of a command line terminal called mintty, bash, version control systems like git and subversion, tools like tar and awk and even build systems like autotools, all based on a modified version of Cygwin. Despite some of these central parts being based on Cygwin, the main focus of MSYS2 is to provide a build environment for native Windows software and the Cygwin-using parts are kept at a minimum. MSYS2 provides up-to-date native builds for GCC, mingw-w64, CPython, CMake, Meson, OpenSSL, FFmpeg, Rust, Ruby, just to name a few.</p>
+</blockquote>
+</li>
+</ul>
+<p>从官方介绍可以知道,msys2是基于Cygwin的修改版,并且提供了一个方便的包管理软件Pacman.<br><em>官方下载链接:</em> <a target="_blank" rel="noopener" href="https://repo.msys2.org/distrib/x86_64/msys2-x86_64-20200720.exe">msys2-x86_64-20200720.exe</a></p>
+<p>下载安装完成后,启动命令终端.<br>首先执行下面命令升级系统包<br><a href="update_msys2.png">升级软件版本</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pacman --needed -Sy bash pacman pacman-mirrors msys2-runtime</span><br></pre></td></tr></table></figure><br>然后关闭MSYS2,重新启动终端.执行下面命令再次更新.<br><a href="update_msys2_1.png">再次更新</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pacman -Su</span><br></pre></td></tr></table></figure><br>安装C项目编译工具链.<br><a href="install_c_build_chains.png">安装c语言编译工具</a><br>windows 64-bit 执行下面命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pacman -S make</span><br><span class="line">$ pacman -S mingw-w64-x86_64-toolchain</span><br></pre></td></tr></table></figure><br>最后开始根据所需版本,编译指定文件<br>以windows 64位操作系统为例<br>到源码目录下执行编译下面命令</p>
+<blockquote>
+<p>注意:本次命令需要打开MinGW终端执行,而不是msys2下,否则会报错.<br><a href="build_unicorn_win64.png">开始编译</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./make.sh cross-win64</span><br></pre></td></tr></table></figure><br>成功编译完成后,在当前目录下可以找到编译成功的动态库 unicorn.dll<br><a href="done.png">编译成功截图</a><br>在simples目录下,有一些可执行样例文件,但是需要拷贝相应依赖到目录下,才可执行.<br>所需文件有:</p>
+<ol>
+<li>unicorn.dll (!)</li>
+<li>%MSYS2%\mingw64\bin\libgcc_s_seh-1.dll</li>
+<li>%MSYS2%\mingw64\bin\libwinpthread-1.dll</li>
+</ol>
+</blockquote>
+<h5 id="nix"><a href="#nix" class="headerlink" title="*nix"></a>*nix</h5><p>在*nix系统中,编译较为简单,大概操作如下<br>安装完c编译工具后….<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /yourpath/unicorn &amp;&amp; make install</span><br></pre></td></tr></table></figure><br>狗头.jpg</p>
+<h4 id="3-安装python-binding"><a href="#3-安装python-binding" class="headerlink" title="3.安装python binding"></a>3.安装python binding</h4><p>将编译出来的动态库(包括其他依赖库)复制到 /yourpath/unicorn/bindings/python/prebuilt<br><a href="copy_to_python.png">复制到指定目录</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /yourpath/unicorn/bindings/python</span><br><span class="line">$ python setup.py bdist_wheel <span class="comment">#构建whl文件</span></span><br><span class="line">$ pip install dist/unicorn-1.0.2rc4-py2.py3-none-win_amd64.whl</span><br></pre></td></tr></table></figure></p>
+<h3 id="下载提前编译的二进制文件"><a href="#下载提前编译的二进制文件" class="headerlink" title="下载提前编译的二进制文件"></a>下载提前编译的二进制文件</h3><p><strong>除上述编译安装方法外，还可以根据平台直接选择下载提前编译好的二进制文件，在此不再赘述，可查看官方安装教程</strong></p>
+<blockquote>
+<p>官方提供的已编译的版本较旧,建议使用最新版本源码自行编译</p>
+</blockquote>
+<h2 id="使用教程"><a href="#使用教程" class="headerlink" title="使用教程"></a>使用教程</h2><h3 id="python代码示例"><a href="#python代码示例" class="headerlink" title="python代码示例"></a>python代码示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入unicorn库</span></span><br><span class="line"><span class="keyword">import</span> unicorn</span><br><span class="line"><span class="comment"># 导入arm_const指令集常量</span></span><br><span class="line"><span class="keyword">from</span> unicorn <span class="keyword">import</span> arm_const</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 硬编码执行代码</span></span><br><span class="line">ARM_CODE = <span class="string">b&quot;\x37\x00\xa0\xe3\x03\x10\x42\xe0&quot;</span></span><br><span class="line"><span class="comment"># mov r0, #0x37;</span></span><br><span class="line"><span class="comment"># sub r1, r2, r3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># callback for tracing instructions</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hook_code</span>(<span class="params">uc, address, size, user_data</span>):</span></span><br><span class="line">    print(<span class="string">&quot;&gt;&gt;&gt; Tracing instruction at 0x%x, instruction size = 0x%x&quot;</span> %</span><br><span class="line">          (address, size))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_arm</span>():</span></span><br><span class="line">    print(<span class="string">&quot;执行 ARM 代码&quot;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 初始化设备为arm模式</span></span><br><span class="line">        mu = unicorn.Uc(unicorn.UC_ARCH_ARM, unicorn.UC_MODE_THUMB)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 给初始化的设备，映射2MB内存</span></span><br><span class="line">        ADDRESS = <span class="number">0x10000</span></span><br><span class="line">        mu.mem_map(ADDRESS, <span class="number">2</span> * <span class="number">0x10000</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 写入代码数据到虚拟设备内存</span></span><br><span class="line">        mu.mem_write(ADDRESS, ARM_CODE)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 写入数据到寄存器</span></span><br><span class="line">        mu.reg_write(arm_const.UC_ARM_REG_R0, <span class="number">0x1234</span>)</span><br><span class="line">        mu.reg_write(arm_const.UC_ARM_REG_R2, <span class="number">0x6789</span>)</span><br><span class="line">        mu.reg_write(arm_const.UC_ARM_REG_R3, <span class="number">0x3333</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 添加指令级的Hook</span></span><br><span class="line">        mu.hook_add(unicorn.UC_HOOK_CODE, hook_code,</span><br><span class="line">                    begin=ADDRESS, end=ADDRESS)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 启动设备</span></span><br><span class="line">        mu.emu_start(ADDRESS, ADDRESS + len(ARM_CODE))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 读取寄存器的值</span></span><br><span class="line">        r0 = mu.reg_read(arm_const.UC_ARM_REG_R0)</span><br><span class="line">        r1 = mu.reg_read(arm_const.UC_ARM_REG_R1)</span><br><span class="line">        print(<span class="string">&quot;&gt;&gt;&gt; R0 = 0x%x&quot;</span> % r0)</span><br><span class="line">        print(<span class="string">&quot;&gt;&gt;&gt; R1 = 0x%x&quot;</span> % r1)</span><br><span class="line">    <span class="keyword">except</span> unicorn.UcError <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">&quot;ERROR: %s&quot;</span> % e)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    test_arm()</span><br></pre></td></tr></table></figure>
+<h3 id="相关说明"><a href="#相关说明" class="headerlink" title="相关说明"></a>相关说明</h3><ol>
+<li>Unicorn 支持多种不同的CPU指令集，每一种指令集都有自己独立的寄存器, Unicorn使用统一API管理多种不同的CPU指令集，并将寄存器名字映射成数字常量</li>
+<li>寄存器常量命名规则<br>UC_ + 指令集 + REG + 大写寄存器名<br>UC_ARM_REG_ + 大写寄存器名 （UC_ARM_REG_R0）<br>UC_X86_REG_ + 大写寄存器名 （UC_X86_REG_EAX）</li>
+<li>Uc 是unicorn的主类，Uc对象则代表了一个独立的虚拟机实例，它有独立的寄存器和内存等资源，不同Uc对象之间的数据是独立的。Uc的构造函数有两个参数 arch 和 mode，用来指定模拟执行的指令集和对应的位数或模式。<br>arch常量参数一般以 UC_ARCH_ 开头，MODE常量以UC_MODE_ 开头。<br>同一种指令集可以有多种模式，比如x86可以同时运行32位和16位的汇编，arm也有arm模式和Thumb模式，它们是向下兼容的，并可以通过特殊指令来切换CPU运行模式。 调用构造函数时的模式（mode）以第一条执行指令的模式为准。</li>
+<li>想用Unicorn模拟执行代码，是不能将代码字节流直接以参数形式传递给Unicorn，而是将要执行的代码写入到Unicorn 的虚拟内存中。Uc 虚拟机实例初始内存是没有任何映射的，在读写内存之前使用uc_mem_map函数映射一段内存。</li>
+<li>em_map函数要求 address 和 size 参数都与0x1000对齐,否则会报UC_ERR_ARG异常。</li>
+<li>要执行代码，就需要将欲执行代码的字节数据写入到虚拟机内存中。</li>
+<li>mem_write的第二个参数只支持python的byte数组，不能是String或者bytearray。</li>
+<li>emu_start 可以通过timeout参数设置最长执行时长，防止线程死在虚拟机里面。</li>
+<li>执行完成后，可以通过读取内存或寄存器的方式来获取执行结果。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Unicorn搭配keystone，可以完成很多跨平台二进制文件的黑盒执行与调用。在逆向分析和爬虫领域有极高实用的价值。</p>
+<p>文章参考：<br><a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-253868.htm">https://bbs.pediy.com/thread-253868.htm</a><br><a target="_blank" rel="noopener" href="https://github.com/kabeor/Micro-Unicorn-Engine-API-Documentation/blob/master/Micro%20Unicorn-Engine%20API%20Documentation.md">https://github.com/kabeor/Micro-Unicorn-Engine-API-Documentation/blob/master/Micro%20Unicorn-Engine%20API%20Documentation.md</a><br><a target="_blank" rel="noopener" href="https://www.unicorn-engine.org/docs/">https://www.unicorn-engine.org/docs/</a></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">1oop</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://youma.today/2020/08/23/Unicorn%E7%B3%BB%E5%88%97-%E5%85%A5%E9%97%A8/">https://youma.today/2020/08/23/Unicorn%E7%B3%BB%E5%88%97-%E5%85%A5%E9%97%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://youma.today" target="_blank">1oop‘s Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a><a class="post-meta__tags" href="/tags/unicorn/">unicorn</a><a class="post-meta__tags" href="/tags/%E9%80%86%E5%90%91/">逆向</a></div><div class="post_share"><div class="social-share" data-image="/2020/08/23/Unicorn%E7%B3%BB%E5%88%97-%E5%85%A5%E9%97%A8/unicorn.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2020/10/15/Docker%E4%B8%8Elinux%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"><img class="prev-cover" data-lazy-src="/2020/10/15/Docker%E4%B8%8Elinux%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/docker_logo.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Docker与linux容器技术</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="disqus_thread"></div></div></div></div></article></main><footer id="footer" style="background-image: url(/2020/08/23/Unicorn%E7%B3%BB%E5%88%97-%E5%85%A5%E9%97%A8/unicorn.png)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2020 By 1oop</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+  else {
+    $.getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js', () => {
+      pangu.spacingElementById('content-inner')
+    })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguFn)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadDisqusjs () {
+  function addDisqusjsCSS () {
+    const ele = document.createElement('link')
+    ele.rel = 'stylesheet'
+    ele.href= 'https://cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css'
+    document.getElementsByTagName('head')[0].appendChild(ele)
+  }
+
+  function initDisqusjs () {
+    window.DISQUS = null
+    new DisqusJS({
+      shortname: '1oop',
+      siteName: '1oop',
+      identifier: '2020/08/23/Unicorn系列-入门/',
+      url: 'https://youma.today/2020/08/23/Unicorn%E7%B3%BB%E5%88%97-%E5%85%A5%E9%97%A8/',
+      title: 'Unicorn系列-入门',
+      api: 'https://disqus.skk.moe/disqus/',
+      apikey: 'WEAhBgZLOlusDickjLOBtzbwYrqdVcVHBRpxSsBL0x5XBZUglLYCr841XEfivIsn',
+      nocomment: '',
+      admin: '1oop',
+      adminLabel: 'admin'
+    });
+  }
+
+  window.disqusReset = initDisqusjs
+
+  if (window.disqusJsLoad) initDisqusjs()
+  else {
+    addDisqusjsCSS()
+    $.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', initDisqusjs)
+    window.disqusJsLoad = true
+  }
+}
+
+if ('Disqusjs' === 'Disqusjs' || !false) {
+  if (false) loadComment(document.getElementById('disqus_thread'), loadDisqusjs)
+  else loadDisqusjs()
+}
+else {
+  function loadOtherComment () {
+    loadDisqusjs()
+  }
+}
+
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script defer="defer" id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  'meta[name=description]',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  refreshFn()
+
+  $('script[data-pjax]').each(function () {
+    $(this).parent().append($(this).remove())
+  })
+
+  GLOBAL_CONFIG.islazyload && lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  $(window).off('scroll')
+
+  //reset readmode
+  $('body').hasClass('read-mode') && $('body').removeClass('read-mode')
+
+})</script></div></body></html>
