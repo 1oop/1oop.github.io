@@ -168,7 +168,11 @@
 <h4 id="UTS-Namespace"><a href="#UTS-Namespace" class="headerlink" title="UTS Namespace"></a>UTS Namespace</h4><p>​    UTS Namespace是对主机名和域名经行隔离，也就是uname系统调用使用的结构体struct ustname 里的nodename和domainname这两个字段，UTS这个名字也是由此而来。</p>
 <h4 id="IPC-Namespace"><a href="#IPC-Namespace" class="headerlink" title="IPC Namespace"></a>IPC Namespace</h4><p>​    IPC是inter-Process Communication的简写，就是是进程间通信。Linux提供了多种进程间通信的机制，IPC Namespace针对的是SystemV IPC和Posix消息队列。这些IPC机制都会用到标识符，例如用标识符来区别不同的消息队列，然后两个进程通过标识符找到对应的消息队列进行通信等。</p>
 <p>​    IPC Namespace能做到的事情是，使用相同的标识符在两个Namespace中代表不同的消息队列，这样也使得两个Namespace中的进程不能通过IPC进程通信了。</p>
-<h4 id="PID-Namespace"><a href="#PID-Namespace" class="headerlink" title="PID Namespace"></a>PID Namespace</h4><p>​    PID Namespace</p>
+<h4 id="PID-Namespace"><a href="#PID-Namespace" class="headerlink" title="PID Namespace"></a>PID Namespace</h4><p>​    PID Namespace用于隔离进程PID号，这样一来，不同Namespace里的进程PID号就可以是一样的了。当创建一个PID Namespace时，第一个进程的PID号就是1，也就是init进程。init进程有一些特殊之处，例如init进程需要负责回收所有孤儿进程的资源。另外，发送给init进程的任何信号都会被屏蔽，即使发送的是SIGKILL信号，也就是说在容器内无法“杀死”init进程。</p>
+<h4 id="Mount-Namespace"><a href="#Mount-Namespace" class="headerlink" title="Mount Namespace"></a>Mount Namespace</h4><p>​    Mount Namespace用来隔离文件系统挂载点，每个进程能看到的问题系统都记录在/proc/$$/mounts里。在创建一个新的Mount Namespace后，进程系统对文件系统挂载/卸载的动作就不会影响到其他Namespace。</p>
+<h4 id="Network-Namespace"><a href="#Network-Namespace" class="headerlink" title="Network Namespace"></a>Network Namespace</h4><p>​    这个Namespace会对网络相关的系统资源进行隔离，每个Network Namespace都有自己的网络设备、IP地址、路由表、/proc/net目录、端口号等，网络隔离的必要性是很明显的，举一个例子，在没有隔离的情况下，如果两个不同的容器都想运行同一个web应用，而这个应用又需要使用80端口，那就会有冲突了。</p>
+<p>​    新创建的Network Namespace 会有一个Lookback 设备，除此之外不会有任何其他网络设备，因此用户需要在这里面做自己的网络配置。IP工具已经支持Network Namespace，可以通过它来为新的Network Namespace配置网络功能。</p>
+<h4 id="User-Namespace"><a href="#User-Namespace" class="headerlink" title="User Namespace"></a>User Namespace</h4><p>​    User Namespace用来隔离用户和组ID，也就是说一个进程在Namespace里的用户组和组ID与它在host里的ID可以不一样，这样说可能大多数用户不清楚有什么实际作用。User Namespace最有用的地方在于，host的普通用户进程里可以是0号用户，也就是root用户。这样，进程在容器内可以做各种特权操作，但是它的特权被限定在容器内，离开了这个容器它就只有普通用户的权限了。（容器内的这类root用户，实际上还是有很多特权操作不能被执行，基本上如果这个特权操作会影响到其他容器或者host，就不会被允许。）</p>
 <h3 id="Cgroup"><a href="#Cgroup" class="headerlink" title="Cgroup"></a>Cgroup</h3><p>​    是Control Group 的简称，又称为控制组，用于资源控制。其原理是将一组进程放在同一个控制组里面，通过对控制组分配指定的可用资源，达到控制这一组进程可用资源的目的。</p>
 <table>
 <thead>
@@ -233,6 +237,7 @@
 <li>huge_tlb：限制HugeTLB的使用 。<em>TLB是CPU中的一块固定大小的cache，包含了部分page table的映射关系，用于快速实现虚拟地址到物理地址的转换。hugetlb 是TLB中指向HugePage的一个entry(通常大于4k或预定义页面大小)。 HugePage 通过hugetlb entries来实现，也可以理解为HugePage 是hugetlb page entry的一个句柄</em></li>
 <li>perf_event：允许Perf工具基于Cgroup分组做性能监测</li>
 </ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​    Docker是对容器技术的完善，为用户提供了更加友好便利的操作方式。与此同时，Docker更是统一了应用打包和分发方式，可以快速地为用户提供服务器级别的应用。</p>
 ]]></content>
       <categories>
         <category>linux</category>
