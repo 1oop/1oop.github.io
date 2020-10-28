@@ -240,12 +240,25 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​    Docker是对容器技术的完善，为用户提供了更加友好便利的操作方式。与此同时，Docker更是统一了应用打包和分发方式，可以快速地为用户提供服务器级别的应用。</p>
 ]]></content>
       <categories>
-        <category>linux</category>
+        <category>云原生</category>
       </categories>
       <tags>
         <tag>docker</tag>
         <tag>linux</tag>
         <tag>容器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>K8s快速入门</title>
+    <url>/2020/10/28/K8s%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>云原生</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>容器</tag>
+        <tag>k8s</tag>
       </tags>
   </entry>
 </search>
