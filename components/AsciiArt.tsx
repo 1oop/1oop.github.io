@@ -3,7 +3,7 @@ interface AsciiArtProps {
 }
 
 export const GopherArt: React.FC<AsciiArtProps> = ({ className }) => (
-  <pre className={`text-[#64dd17] text-xs leading-none ${className}`}>
+  <pre className={`text-[#81a9ff] text-xs leading-none ${className}`}>
     {`
      ,_---~~~~~----._         
   _,,_,*^____      _____\`*g*\"*, 
@@ -20,20 +20,6 @@ export const GopherArt: React.FC<AsciiArtProps> = ({ className }) => (
   </pre>
 );
 
-export const ComputerArt: React.FC<AsciiArtProps> = ({ className }) => (
-  <pre className={`text-[#42a5f5] text-xs leading-none ${className}`}>
-    {`
-     .-------------------.
-     |.------------------.|
-     ||      1oop.dev    ||
-     ||                  ||
-     ||        []        ||
-     ||                  ||
-     |'------------------'|
-     \`-------------------'
-    `}
-  </pre>
-);
 
 export const RocketArt: React.FC<AsciiArtProps> = ({ className }) => (
   <pre className={`text-[#ce9178] text-xs leading-none ${className}`}>
