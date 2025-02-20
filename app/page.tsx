@@ -25,10 +25,11 @@ export default async function Home() {
                   <span className="text-[#42a5f5]">whoami</span>
                 </div>
                 <div>
-                  <span className="text-[2.5em]">Zhang Shan</span>
-                  <span className="text-[#6a9955] text-[1.5em]">
+                  <span className="text-[2em] md:text-[1em]">Zhang Shan</span>
+                  <br className="block md:hidden"/>
+                  <span className="text-[#6a9955] text-[1.5em] md:text-[1em]">
                     {" "}
-                    #Full Stack Developer
+                    // Full Stack Developer
                   </span>
                 </div>
               </div>
@@ -75,9 +76,9 @@ export default async function Home() {
           </TmuxPane>
           
           {/* 干杯！ */}
-          <TmuxPane title="cheers~">
+          <TmuxPane title="cheers~" className="mb-4 hidden md:block">
             <div className="flex justify-around">
-              <GopherArt className="mb-4 hidden md:block" />
+              <GopherArt className="ml-4 hidden md:block" />
               <CoffeeSteam className="hidden md:block" />
             </div>
           </TmuxPane>
