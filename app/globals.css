@@ -19,3 +19,39 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+.typing-effect {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end);
+}
+
+/* 添加新的打字机效果样式 */
+.typing-line {
+  overflow: hidden;
+  white-space: pre;
+  animation: typing 0.5s steps(40, end);
+}
+
+/* 添加鼠标悬停时的代码块发光效果 */
+.hover\:glow:hover {
+  box-shadow: 0 0 10px rgba(100, 221, 23, 0.2);
+}
+
+/* 添加渐变背景动画 */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-animate {
+  background: linear-gradient(-45deg, #1e1e1e, #2d2d2d, #1e1e1e);
+  background-size: 200% 200%;
+  animation: gradient 15s ease infinite;
+}
