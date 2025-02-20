@@ -4,11 +4,19 @@ import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
-import { getArticle } from '@/utils/articles';
+import { getArticle, getArticleMetas } from '@/utils/articles';
 import type { Components } from 'react-markdown';
 import { CodeProps, PageProps } from '@/types/article';
 
 
+
+export async function generateStaticParams() {
+  const articles = await getArticleMetas();
+  
+  return articles.map((article) => ({
+    slug: article.slug,
+  }));
+}
 
 export default async function ArticlePage({params} :PageProps) {
   const resolveParams = await params;
