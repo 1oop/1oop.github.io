@@ -22,7 +22,7 @@ const TmuxPane: React.FC<PaneProps> = ({ title, children, className = "" }) => (
 
 export const TmuxLayout = ({ children }: { children: React.ReactNode }) => (
   <div className="min-h-screen bg-[#1e1e1e] text-[#d4d4d4] p-4 font-mono">
-    <div className="flex justify-between items-center bg-[#2d2d2d] p-2 mb-4 relative">
+    <div className="sticky top-0 z-40 flex justify-between items-center bg-[#2d2d2d] p-2 mb-4">
       <div className="flex gap-2 items-center">
         <span className="bg-[#64dd17] px-2">0:zsh*</span>
         <span className="text-[#6a9955] hidden md:block">1:vim</span>

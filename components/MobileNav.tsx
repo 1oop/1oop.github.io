@@ -13,7 +13,7 @@ export default function MobileNav() {
   ];
 
   return (
-    <div className="md:hidden">
+    <div className="md:hidden relative">
       {/* 菜单按钮 */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -24,7 +24,7 @@ export default function MobileNav() {
 
       {/* 弹出菜单 */}
       {isOpen && (
-        <div className="absolute top-14 left-0 right-0 bg-[#1e1e1e] border border-[#3c3c3c] p-4 space-y-2 shadow-lg">
+        <div className="fixed top-[60px] left-0 right-0 bg-[#1e1e1e] border border-[#3c3c3c] p-4 space-y-2 shadow-lg z-50">
           {navItems.map(({ path, label, icon }) => (
             <Link
               key={path}
