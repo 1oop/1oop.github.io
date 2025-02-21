@@ -15,7 +15,6 @@ export default async function Home() {
       <div className="grid grid-cols-12 gap-4 h-[calc(100vh-80px)]">
         {/* 左侧面板 - 个人信息和技能 */}
         <div className="col-span-12 md:col-span-4 space-y-4">
-
           {/* 个人信息 */}
           <TmuxPane title="profile">
             <div className="text-[#d4d4d4] space-y-2 relative">
@@ -26,10 +25,9 @@ export default async function Home() {
                 </div>
                 <div>
                   <span className="text-[2em] md:text-[1em]">Zhang Shan</span>
-                  <br className="block md:hidden"/>
+                  <br className="block md:hidden" />
                   <span className="text-[#6a9955] text-[1.5em] md:text-[1em]">
-                    {" "}
-                    // Full Stack Developer
+                    {" // Full Stack Developer"}
                   </span>
                 </div>
               </div>
@@ -53,14 +51,16 @@ export default async function Home() {
               </div>
             </div>
           </TmuxPane>
-          
+
           {/* 联系方式 */}
           <TmuxPane title="contact">
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <span className="text-[#64dd17]">➜</span>
                 <span className="text-[#42a5f5]">Email:</span>
-                <span className="text-[#ce9178] hover:text-[#64dd17]">coding_zs@163.com</span>
+                <span className="text-[#ce9178] hover:text-[#64dd17]">
+                  coding_zs@163.com
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[#64dd17]">➜</span>
@@ -74,7 +74,7 @@ export default async function Home() {
               </div>
             </div>
           </TmuxPane>
-          
+
           {/* 干杯！ */}
           <TmuxPane title="cheers~" className="mb-4 hidden md:block">
             <div className="flex justify-around">
